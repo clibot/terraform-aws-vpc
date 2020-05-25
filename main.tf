@@ -52,7 +52,7 @@ resource "aws_subnet" "public" {
   availability_zone_id = var.azs[count.index]
 
   tags = {
-    Name = "${var.name}-${var.azs[count.index]}"
+    Name = "${var.name}-public-${var.azs[count.index]}"
   }
 }
 
@@ -69,11 +69,11 @@ resource "aws_subnet" "private" {
   count = length(var.private_subnets)
 
   vpc_id               = aws_vpc.this.id
-  cidr_block           = var.public_subnets[count.index]
+  cidr_block           = var.private_subnets[count.index]
   availability_zone_id = var.azs[count.index]
 
   tags = {
-    Name = "${var.name}-${var.azs[count.index]}"
+    Name = "${var.name}-private-${var.azs[count.index]}"
   }
 }
 
